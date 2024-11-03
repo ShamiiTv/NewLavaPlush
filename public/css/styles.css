@@ -1,0 +1,87 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-color: #e3fbe3;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor {
+    width: 27%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+
+.contenedor img{
+    display: flex;
+    margin: 0 auto;   
+}
+.contenedorformulario{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.contenedorBienvenida{
+
+    text-align: center;
+    padding-top: 50px;
+
+}
+
+.lineaSeparadora{
+    display: flex;
+    margin:0 auto;
+    margin-top: 20px;
+    width: 65%;
+    margin-bottom: 20px;
+    border-bottom: 2.5px solid #8abb8e ;
+}
+
+.contenedorBoton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn1{
+    background-color: #dfe2e7;
+    color: #34383b;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn2{
+    background-color: #54c45e;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form-control{
+    border: 2px solid #000000;
+}
+
+.recuperarContraseña{
+    padding-top: 25px;
+    text-align: center;
+    color: #66c00b;
+}
