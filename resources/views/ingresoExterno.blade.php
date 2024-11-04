@@ -102,9 +102,9 @@
     </div>
     <div class="content">
             <div class="contenedor">
-                <h5 class="tituloIRSC"> Ingreso de ropa Servicio Clinico</h5>
+                <h5 class="tituloIRSC"> Ingreso de ropa Servicio Externo</h5>
                 <div class="lineaSeparadora"></div>
-                <form action="{{ url('/ingresoInterno') }}" method="POST">
+                <form action="{{ url('/ingresoExterno') }}" method="POST">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tipo de prenda</label>
@@ -152,7 +152,7 @@
                 </form>
             </div>
             <div class="container mt-4">
-                <h5>Registros de Ingreso de Ropa</h5>
+                <h5>Registros de Ingreso de Ropa en servicio externo</h5>
                 <table class="table table-striped">
                     <thead>
                         <tr>

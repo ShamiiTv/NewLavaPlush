@@ -67,14 +67,14 @@
               alt="Porseacaso Icon">
             Egreso de ropa Servicio Externo
           </a>
-        </li> 
+        </li>
         <li>
           <a href="{{ route('generacionInformes') }}" class="nav-link text-white">
             <img src="{{ asset('imagenes/iconos/archive.png') }}" class="bi pe-none me-2" width="22" height="22"
               alt="Porseacaso Icon">
             Generacion de reportes
           </a>
-        </li> 
+        </li>
       </ul>
       <hr>
       <div class="dropdown">
@@ -97,49 +97,115 @@
         </ul>
       </div>
     </div>
+
     <div class="content">
-      <div class="imagenbanner">
-        <img src="{{ asset('imagenes/banner.png') }}" alt="">
+      <div class="egresoRopa">
+        <h1 class="my-4">Egreso de Ropa - Servicio Externo</h1>
+        @if(session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
       </div>
-      <div class="contenedor">
-        <div id="carouselExampleIndicators" class="carousel slide">
-          <ol class="carousel-indicators">
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="{{ asset('imagenes/carrusel/1.jpg') }}" class="d-block w-100" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img src="{{ asset('imagenes/carrusel/2.jpg') }}" class="d-block w-100" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img src="{{ asset('imagenes/carrusel/3.jpg') }}" class="d-block w-100" alt="Third slide">
-            </div>
+    @endif
+        @if($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+        @foreach($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
+        </ul>
+      </div>
+    @endif
+
+        <form action="{{ route('egresoExterno') }}" method="POST">
+          @csrf
+          <div class="mb-3">
+            <label for="tipo_ropa" class="form-label">Tipo de Ropa</label>
+            <select class="form-select" name="tipo_ropa" id="tipo_ropa" required onchange="actualizarTipoRopaDetalle()">
+              <option value="">Seleccione el tipo de ropa</option>
+              <option value="limpia">Limpia</option>
+              <option value="sucia">Sucia</option>
+            </select>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
+
+          <div class="mb-3">
+            <label for="tipo_ropa_detalle" class="form-label">Detalle del Tipo de Ropa</label>
+            <select class="form-select" name="tipo_ropa_detalle" id="tipo_ropa_detalle" required>
+              <option value="">Seleccione el detalle</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad a Egresar</label>
+            <input type="number" class="form-control" name="cantidad" id="cantidad" min="1" required>
+          </div>
+
+          <button type="submit" class="btn btn-danger">Registrar Egreso</button>
+          <a href="{{ route('inicio') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
       </div>
-      <div class="footer1">
-        <p>© 2024 LavaPlus - Versión 1.0</p>
+
+      <div class="container mt-4">
+        <h5>Registros de Egreso de ropa servicio Externo</h5>
+        <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Estado</th>
+            <th>Tipo de ropa</th>
+            <th>Ultima Cantidad Egresada</th>
+            <th>Cantidad Actual</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach($egresosRopa as $egreso)
+        <tr>
+            <td>{{ ucfirst($egreso->tipo_ropa) }}</td>
+            <td>{{ $egreso->tipo_ropa_detalle }}</td>
+            <td>{{ $egreso->ultima_cantidad_egresada ?? 0 }}</td>
+            <td>{{ $egreso->cantidad }}</td>
+            <td>{{ $egreso->user->name ?? 'Desconocido' }}</td>
+            <td>{{ $egreso->created_at->timezone('America/Santiago')->format('d/m/Y H:i') }}</td>
+        </tr>
+    @endforeach
+</tbody>
+</table>
       </div>
+
     </div>
+
+  </div>
+  <div class="footer1">
+    <p>© 2024 LavaPlus - Versión 1.0</p>
+  </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <script>
+    const tiposPrendasLimpias = @json($tiposPrendasLimpias);
+    const tiposPrendasSucias = @json($tiposPrendasSucias);
+
+    function actualizarTipoRopaDetalle() {
+      const tipoRopa = document.getElementById("tipo_ropa").value;
+      const tipoRopaDetalle = document.getElementById("tipo_ropa_detalle");
+
+      tipoRopaDetalle.innerHTML = '<option value="">Seleccione el detalle</option>';
+
+      const opciones = tipoRopa === "limpia" ? tiposPrendasLimpias : tipoRopa === "sucia" ? tiposPrendasSucias : [];
+
+      opciones.forEach(tipo => {
+        const option = document.createElement("option");
+        option.value = tipo;
+        option.textContent = tipo;
+        tipoRopaDetalle.appendChild(option);
+      });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz4fnFO9gybO3AL1H6C53Ph1+NTFcH3Nn4V+74h6Q3b/6XnxTfYeq4OW6w" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-2c1n6ovf58KjRsP2HxErg4MBsmipbGy3Hyxgf9kvlW3lFv0+wY5vEGXHQI8rViJW" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

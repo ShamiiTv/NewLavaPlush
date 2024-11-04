@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EgresoExternoController;
 use App\Http\Controllers\IngresoExternoController;
 use App\Http\Controllers\TodosController;
 use App\Http\Controllers\Auth\LoginController;
@@ -50,13 +51,14 @@ Route::get('/egresoInterno', function () {
 
 Route::get('/ingresoExterno',[IngresoExternoController::class, 'showForm'])->name('ingresoExterno')->middleware('auth');
 
-Route::get('/egresoExterno', function () {
-    return view('egresoExterno');
-})->name('egresoExterno')->middleware('auth');
+Route::get('/egresoExterno', [EgresoExternoController::class, 'showForm'])->name('egresoExterno');
+Route::post('/egresoExterno', [EgresoExternoController::class, 'store']);
+
 
 Route::get('/generacionInformes', function () {
     return view('generacionInformes');
 })->name('generacionInformes')->middleware('auth');
 
 Route::post('/ingresoInterno', [IngresoRopaController::class, 'store'])->middleware('auth');
+Route::post('/ingresoExterno', [IngresoExternoController::class, 'store'])->middleware('auth');
 Route::get('/get-tipo-ropa-detalles', [IngresoRopaController::class, 'getTipoRopaDetalles'])->middleware('auth');

@@ -152,7 +152,7 @@
                 </form>
             </div>
             <div class="container mt-4">
-                <h5>Registros de Ingreso de Ropa</h5>
+                <h5>Registros de Ingreso de Ropa en servicio clinico</h5>
                 <table class="table table-striped">
                     <thead>
                         <tr>
