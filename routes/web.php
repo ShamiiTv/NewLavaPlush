@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\IngresoRopaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReporteInventarioController;
+use App\Http\Controllers\EgresoRopaController;
 
 // Página de inicio
 Route::get('/', function () {
@@ -22,6 +24,7 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/perfil', [PerfilController::class, 'perfil'])->name('perfil');
 
 // Registro de usuarios
 Route::get('/registro', [RegisterController::class, 'showRegistrationForm'])->name('registro');
@@ -49,6 +52,11 @@ Route::get('/egresoInterno', function () {
     return view('egresoInterno');
 })->name('egresoInterno')->middleware('auth');
 
+
+Route::get('/perfil', function () {
+    return view('perfil');
+})->name('perfil')->middleware('auth');
+
 Route::get('/ingresoExterno',[IngresoExternoController::class, 'showForm'])->name('ingresoExterno')->middleware('auth');
 
 Route::get('/egresoExterno', [EgresoExternoController::class, 'showForm'])->name('egresoExterno');
@@ -62,3 +70,10 @@ Route::get('/generacionInformes', function () {
 Route::post('/ingresoInterno', [IngresoRopaController::class, 'store'])->middleware('auth');
 Route::post('/ingresoExterno', [IngresoExternoController::class, 'store'])->middleware('auth');
 Route::get('/get-tipo-ropa-detalles', [IngresoRopaController::class, 'getTipoRopaDetalles'])->middleware('auth');
+
+Route::get('/reporteInventario', [ReporteInventarioController::class, 'generarReporte'])->name('reporteInventario')->middleware('auth');
+Route::get('/ruta-a-obtener-datos', [ReporteInventarioController::class, 'obtenerDatosPrenda']);
+
+
+Route::get('/egresoInterno', [EgresoRopaController::class, 'showForm2'])->name('egresoInterno');
+Route::post('/egresoInterno', [EgresoRopaController::class, 'store2']);

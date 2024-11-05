@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio</title>
   <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
+  <link rel="icon" href="{{ asset('imagenes/logo/logo2lavaplus.png') }}" type="icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -21,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-disabled="true">{{ Auth::user()->name }}</a>
+            <a class="nav-link" aria-disabled="true">¡Bienvenido, {{ Auth::user()->name }}!</a>
           </li>
         </ul>
       </div>
@@ -30,7 +31,14 @@
 
   <div class="d-flex">
     <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-      <a class="nav-link" aria-disabled="true">{{ Auth::user()->name }}</a>
+    <a class="nav-link" aria-disabled="true">
+    <span class="icon-container">
+        <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario"  width="20" height="20">
+    </span>
+    <span>{{ Auth::user()->name }}</span>
+</a>
+
+
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -69,7 +77,7 @@
           </a>
         </li> 
         <li>
-          <a href="{{ route('generacionInformes') }}" class="nav-link text-white">
+        <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
             <img src="{{ asset('imagenes/iconos/archive.png') }}" class="bi pe-none me-2" width="22" height="22"
               alt="Porseacaso Icon">
             Generacion de reportes
@@ -84,7 +92,7 @@
           <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -99,7 +107,7 @@
     </div>
     <div class="content">
       <div class="imagenbanner">
-        <img src="{{ asset('imagenes/banner.png') }}" alt="">
+        <img src="{{ asset('imagenes/banner5.jpg') }}" alt="">
       </div>
       <div class="contenedor">
         <div id="carouselExampleIndicators" class="carousel slide">
@@ -131,6 +139,14 @@
           </button>
         </div>
       </div>
+
+
+
+
+
+
+
+      
       <div class="footer1">
         <p>© 2024 LavaPlus - Versión 1.0</p>
       </div>

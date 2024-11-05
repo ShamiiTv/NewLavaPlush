@@ -41,6 +41,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // Redirigir a la página de inicio
-        return redirect()->intended('inicio');
+        return redirect()->intended('/');
     }
 }

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio</title>
   <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
+  <link rel="icon" href="{{ asset('imagenes/logo/logo2lavaplus.png') }}" type="icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -21,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-disabled="true">{{ Auth::user()->name }}</a>
+            <a class="nav-link" aria-disabled="true">¡Bienvenido, {{ Auth::user()->name }}!</a>
           </li>
         </ul>
       </div>
@@ -30,7 +31,12 @@
 
   <div class="d-flex">
     <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-      <a class="nav-link" aria-disabled="true">{{ Auth::user()->name }}</a>
+    <a class="nav-link" aria-disabled="true">
+    <span class="icon-container">
+        <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario"  width="20" height="20">
+    </span>
+    <span>{{ Auth::user()->name }}</span>
+</a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -69,7 +75,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ route('generacionInformes') }}" class="nav-link text-white">
+        <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
             <img src="{{ asset('imagenes/iconos/archive.png') }}" class="bi pe-none me-2" width="22" height="22"
               alt="Porseacaso Icon">
             Generacion de reportes
@@ -84,7 +90,7 @@
           <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
+        <li><a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -98,54 +104,60 @@
       </div>
     </div>
 
+    
     <div class="content">
-      <div class="egresoRopa">
-        <h1 class="my-4">Egreso de Ropa - Servicio Externo</h1>
-        @if(session('success'))
-      <div class="alert alert-success">
-        {{ session('success') }}
-      </div>
-    @endif
-        @if($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-        @foreach($errors->all() as $error)
-      <li>{{ $error }}</li>
-    @endforeach
-        </ul>
-      </div>
-    @endif
+              <div class="egresoRopa">
+                
+                @if(session('success'))
+              <div class="alert alert-success">
+                {{ session('success') }}
+              </div>
+            @endif
+                @if($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                @foreach($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+                </ul>
+              </div>
+            @endif
+            <div class="contenedor2">
+                  <h5 class="my-4">Egreso de Ropa - Servicio Externo</h5>
+                  <div class="lineaSeparadora3"></div>
+                    
+              <form action="{{ route('egresoExterno') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                  <label for="tipo_ropa" class="form-label">Tipo de Ropa</label>
+                  <select class="form-select" name="tipo_ropa" id="tipo_ropa" required onchange="actualizarTipoRopaDetalle()">
+                    <option value="">Seleccione el tipo de ropa</option>
+                    <option value="limpia">Limpia</option>
+                    <option value="sucia">Sucia</option>
+                  </select>
+                </div>
 
-        <form action="{{ route('egresoExterno') }}" method="POST">
-          @csrf
-          <div class="mb-3">
-            <label for="tipo_ropa" class="form-label">Tipo de Ropa</label>
-            <select class="form-select" name="tipo_ropa" id="tipo_ropa" required onchange="actualizarTipoRopaDetalle()">
-              <option value="">Seleccione el tipo de ropa</option>
-              <option value="limpia">Limpia</option>
-              <option value="sucia">Sucia</option>
-            </select>
-          </div>
+                <div class="mb-3">
+                  <label for="tipo_ropa_detalle" class="form-label">Detalle del Tipo de Ropa</label>
+                  <select class="form-select" name="tipo_ropa_detalle" id="tipo_ropa_detalle" required>
+                    <option value="">Seleccione el detalle</option>
+                  </select>
+                </div>
 
-          <div class="mb-3">
-            <label for="tipo_ropa_detalle" class="form-label">Detalle del Tipo de Ropa</label>
-            <select class="form-select" name="tipo_ropa_detalle" id="tipo_ropa_detalle" required>
-              <option value="">Seleccione el detalle</option>
-            </select>
-          </div>
+                <div class="mb-3">
+                  <label for="cantidad" class="form-label">Cantidad a Egresar</label>
+                  <input type="number" class="form-control" name="cantidad" id="cantidad" min="1" required>
+                </div>
 
-          <div class="mb-3">
-            <label for="cantidad" class="form-label">Cantidad a Egresar</label>
-            <input type="number" class="form-control" name="cantidad" id="cantidad" min="1" required>
-          </div>
-
-          <button type="submit" class="btn btn-danger">Registrar Egreso</button>
-          <a href="{{ route('inicio') }}" class="btn btn-secondary">Cancelar</a>
-        </form>
-      </div>
+                <button type="submit" class="btn btn-danger">Registrar Egreso</button>
+                <a href="{{ route('inicio') }}" class="btn btn-secondary">Cancelar</a>
+              </form>
+            </div>
+    </div>
 
       <div class="container mt-4">
         <h5>Registros de Egreso de ropa servicio Externo</h5>
+        <div class="lineaSeparadora2"></div>
         <table class="table table-striped">
     <thead>
         <tr>

@@ -15,7 +15,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Autenticación exitosa
-            return redirect()->intended('inicio'); // Cambia 'home' por la ruta a la que deseas redirigir
+            return redirect()->intended('/')
+                             ->with('status', 'success'); // Enviamos un mensaje de éxito
         }
 
         // Autenticación fallida
@@ -31,3 +32,4 @@ class LoginController extends Controller
         return redirect('/login'); // Redirige al usuario a la página de inicio de sesión
     }
 }
+

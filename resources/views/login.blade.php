@@ -7,6 +7,7 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="icon" href="{{ asset('imagenes/logo/logo2lavaplus.png') }}" type="icon">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
@@ -16,7 +17,7 @@
 <body>
     <div class="contenedor">
         <div class="contenedorimagen">
-           <!-- <img src="{{ asset('imagenes/LogoHSJ.png') }}"> -->
+            <!-- <img src="{{ asset('imagenes/LogoHSJ.png') }}"> -->
         </div>
         <div class="contenedorBienvenida">
             <h5>¡Bienvenido, usuario!</h5>
@@ -34,18 +35,50 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" name="password"
                         placeholder="Ingrese su contraseña" required>
                 </div>
+
                 <div class="contenedorBoton">
                     <button type="submit" class="btn1">Iniciar Sesión</button>
                     <button type="button" class="btn2"
                         onclick="window.location.href='{{ route('registro') }}'">Crear Cuenta</button>
                 </div>
                 <div class="recuperarContraseña">
-                    <a class="recuperarContraseña"href="{{ route('password.request') }}">Recuperar contraseña</a>
-                    
+                    <a class="recuperarContraseña" href="{{ route('password.request') }}">Recuperar contraseña</a>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Modal de Error -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error de Autenticación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar el modal si hay errores
+        @if ($errors->any())
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        @endif
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
