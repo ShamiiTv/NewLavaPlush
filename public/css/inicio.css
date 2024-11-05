@@ -66,9 +66,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
-
 
 .contenedor {
     display: flex;
@@ -80,21 +78,20 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     margin-top: 50px;
-
 }
 
-.tituloIRSC{
+.tituloIRSC {
     text-align: center;
-    padding-top:20px;
+    padding-top: 20px;
 }
 
-.lineaSeparadora{
+.lineaSeparadora {
     display: flex;
-    margin:0 auto;
+    margin: 0 auto;
     margin-top: 20px;
     width: 85%;
     margin-bottom: 20px;
-    border-bottom: 2.5px solid #8abb8e ;
+    border-bottom: 2.5px solid #8abb8e;
 }
 
 .contenedorBoton {
@@ -103,7 +100,7 @@ body {
     justify-content: center;
 }
 
-.btn2{
+.btn2 {
     background-color: #54c45e;
     color: #fff;
     font-weight: bold;
@@ -113,7 +110,6 @@ body {
     cursor: pointer;
     margin-top: 20px;
 }
-
 
 .form-group {
     margin-bottom: 1rem;
@@ -161,8 +157,6 @@ body {
     width: 100%;
 }
 
-
-/* Estilo personalizado para el botón de SweetAlert2 */
 .btn-custom {
     background-color: #54c45e !important;
     border: none;
@@ -171,18 +165,17 @@ body {
     font-weight: bold;
 }
 
-
 .footer1 {
     background-color: #343a40;
     color: #fff !important;
     font-weight: bold;
     padding: 10px;
-    margin-top: auto; /* Empuja el footer al final del contenedor principal */
+    margin-top: auto;
     width: 100%;
     text-align: center;
 }
 
-.imagenbanner{
+.imagenbanner {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -194,27 +187,23 @@ body {
     margin-top: 50px;
 }
 
-.table{
-   
+.table {
     margin-top: 60px;
-   
 }
 
-h5{
+h5 {
     margin: 30px;
     justify-content: center;
     display: flex;
-   
-    
 }
 
-.lineaSeparadora2{
+.lineaSeparadora2 {
     display: flex;
-    margin:0 auto;
+    margin: 0 auto;
     margin-top: 20px;
     width: 85%;
     margin-bottom: 20px;
-    border-bottom: 1px solid #8abb8e ;
+    border-bottom: 1px solid #8abb8e;
 }
 
 .contenedor2 {
@@ -229,21 +218,85 @@ h5{
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     margin-top: 50px;
     margin-right: 30px;
-
 }
 
 .form-label {
-    
     font-weight: bold !important;
 }
 
-
-.lineaSeparadora3{
+.lineaSeparadora3 {
     display: flex;
-    margin:0 auto;
+    margin: 0 auto;
     margin-top: 5px;
     width: 85%;
     margin-bottom: 20px;
-    border-bottom: 2.5px solid #8abb8e ;
+    border-bottom: 2.5px solid #8abb8e;
 }
+
+.perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.informacionPerfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 500px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #e6e6e6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto;
+}
+
+.informacionPerfil h1 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.datosPerfil {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.datos {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.datos h2 {
+    font-size: 1.2em;
+    color: #54c45e;
+    margin-bottom: 5px;
+}
+
+.datos p {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 5px;
+}
+
+.footerperfil {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
 

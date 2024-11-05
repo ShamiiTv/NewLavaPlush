@@ -23,6 +23,13 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
+        ],[
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',    
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe  tener al menos 8 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
 
         // Si la validación falla, redirige de vuelta con los errores

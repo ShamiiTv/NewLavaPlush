@@ -30,13 +30,14 @@
   </nav>
 
   <div class="d-flex">
-    <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-    <a class="nav-link" aria-disabled="true">
-    <span class="icon-container">
-        <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario"  width="20" height="20">
-    </span>
-    <span>{{ Auth::user()->name }}</span>
-</a>
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="min-width: 350px; max-width: 350px;">
+      <a class="nav-link" aria-disabled="true">
+        <span class="icon-container">
+          <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario" width="20"
+            height="20">
+        </span>
+        <span>{{ Auth::user()->name }}</span>
+      </a>
 
 
       <hr>
@@ -75,14 +76,14 @@
               alt="Porseacaso Icon">
             Egreso de ropa Servicio Externo
           </a>
-        </li> 
+        </li>
         <li>
-        <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
+          <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
             <img src="{{ asset('imagenes/iconos/archive.png') }}" class="bi pe-none me-2" width="22" height="22"
               alt="Porseacaso Icon">
             Generacion de reportes
           </a>
-        </li> 
+        </li>
       </ul>
       <hr>
       <div class="dropdown">
@@ -105,21 +106,35 @@
         </ul>
       </div>
     </div>
-    
-  
 
-
-
-      
+    <div class="content">
+      <div class="perfil">
+        <div class="informacionPerfil">
+          <h1>Perfil de usuario</h1>
+          <div class="datosPerfil">
+            <div class="datos">
+              <h2>ID Usuario:</h2>
+              <p>{{ Auth::user()->id }}</p>
+              <h2>Nombre:</h2>
+              <p>{{ Auth::user()->name }}</p>
+            </div>
+            <div class="datos">
+              <h2>Correo:</h2>
+              <p>{{ Auth::user()->email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="footer1">
         <p>© 2024 LavaPlus - Versión 1.0</p>
       </div>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>

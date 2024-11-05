@@ -34,12 +34,13 @@
 
   <div class="d-flex">
     <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-    <a class="nav-link" aria-disabled="true">
-    <span class="icon-container">
-        <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario"  width="20" height="20">
-    </span>
-    <span>{{ Auth::user()->name }}</span>
-</a>
+      <a class="nav-link" aria-disabled="true">
+        <span class="icon-container">
+          <img src="{{ asset('imagenes/iconos/usuario.png') }}" style="margin: 3px" alt="Usuario" width="20"
+            height="20">
+        </span>
+        <span>{{ Auth::user()->name }}</span>
+      </a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -76,14 +77,14 @@
               alt="Porseacaso Icon">
             Egreso de ropa Servicio Externo
           </a>
-        </li> 
+        </li>
         <li>
-        <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
+          <a href="{{ route('reporteInventario') }}" class="nav-link text-white">
             <img src="{{ asset('imagenes/iconos/archive.png') }}" class="bi pe-none me-2" width="22" height="22"
               alt="Porseacaso Icon">
             Generacion de reportes
           </a>
-        </li> 
+        </li>
       </ul>
       <hr>
       <div class="dropdown">
@@ -93,7 +94,7 @@
           <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a></li>
+          <li><a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -107,109 +108,108 @@
       </div>
     </div>
     <div class="content">
-            <div class="contenedor">
-                <h5 class="tituloIRSC"> Ingreso de ropa Servicio Externo</h5>
-                <div class="lineaSeparadora"></div>
-                <form action="{{ url('/ingresoExterno') }}" method="POST">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Tipo de prenda</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" id="tipoRopaDetalle" name="tipo_ropa_detalle" required>
-                                <option value="" disabled selected>Selecciona el tipo de prenda</option>
-                                @foreach ($tiposPrendas as $tipoPrenda)
-                                    <option value="{{ $tipoPrenda }}">{{ ucfirst($tipoPrenda) }}</option>
-                                @endforeach
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row" id="tipoRopaOtroWrapper" style="display: none;">
-                        <label class="col-sm-2 col-form-label">Especificar tipo de prenda</label>
-                        <div class="col-sm-10 mt-4">
-                            <input type="text" class="form-control" id="tipoRopaOtro" name="tipo_ropa_detalle_otro"
-                                placeholder="Especificar tipo de prenda">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Estado de ropa</label>
-                        <div class="col-sm-10">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_ropa" id="tipoRopaLimpia"
-                                    value="limpia" checked>
-                                <label class="form-check-label" for="tipoRopaLimpia">Ropa Limpia</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_ropa" id="tipoRopaSucia"
-                                    value="sucia">
-                                <label class="form-check-label" for="tipoRopaSucia">Ropa Sucia</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Cantidad</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
-                        </div>
-                    </div>
-                    <div class="contenedorBoton">
-                        <button type="submit" class="btn2">Registrar</button>
-                    </div>
-                </form>
+      <div class="contenedor">
+        <h5 class="tituloIRSC"> Ingreso de ropa Servicio Externo</h5>
+        <div class="lineaSeparadora"></div>
+        <form action="{{ url('/ingresoExterno') }}" method="POST">
+          @csrf
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Tipo de prenda</label>
+            <div class="col-sm-10">
+              <select class="form-select" id="tipoRopaDetalle" name="tipo_ropa_detalle" required>
+                <option value="" disabled selected>Selecciona el tipo de prenda</option>
+                @foreach ($tiposPrendas as $tipoPrenda)
+          <option value="{{ $tipoPrenda }}">{{ ucfirst($tipoPrenda) }}</option>
+        @endforeach
+                <option value="otro">Otro</option>
+              </select>
             </div>
-            <div class="container mt-4">
-                <h5>Registros de Ingreso de Ropa en servicio externo</h5>
-                <div class="lineaSeparadora2"></div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Estado</th>
-                            <th>Tipo de ropa</th>
-                            <th>Cantidad</th>
-                            <th>Usuario</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($ingresosRopa as $ingreso)
-                            <tr>
-                                <td>{{ ucfirst($ingreso->tipo_ropa) }}</td>
-                                <td>{{ $ingreso->tipo_ropa_detalle }}</td>
-                                <td>{{ $ingreso->cantidad }}</td>
-                                <td>{{ $ingreso->user->name ?? 'Desconocido' }}</td>
-                                <td>{{ $ingreso->created_at->timezone('America/Santiago')->format('d/m/Y H:i') }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+          </div>
+          <div class="form-group row" id="tipoRopaOtroWrapper" style="display: none;">
+            <label class="col-sm-2 col-form-label">Especificar tipo de prenda</label>
+            <div class="col-sm-10 mt-4">
+              <input type="text" class="form-control" id="tipoRopaOtro" name="tipo_ropa_detalle_otro"
+                placeholder="Especificar tipo de prenda">
             </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Estado de ropa</label>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_ropa" id="tipoRopaLimpia" value="limpia"
+                  checked>
+                <label class="form-check-label" for="tipoRopaLimpia">Ropa Limpia</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_ropa" id="tipoRopaSucia" value="sucia">
+                <label class="form-check-label" for="tipoRopaSucia">Ropa Sucia</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Cantidad</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
+            </div>
+          </div>
+          <div class="contenedorBoton">
+            <button type="submit" class="btn2">Registrar</button>
+          </div>
+        </form>
+      </div>
+      <div class="container mt-4">
+        <h5>Registros de Ingreso de Ropa en servicio externo</h5>
+        <div class="lineaSeparadora2"></div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Estado</th>
+              <th>Tipo de ropa</th>
+              <th>Cantidad</th>
+              <th>Usuario</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($ingresosRopa as $ingreso)
+        <tr>
+          <td>{{ ucfirst($ingreso->tipo_ropa) }}</td>
+          <td>{{ $ingreso->tipo_ropa_detalle }}</td>
+          <td>{{ $ingreso->cantidad }}</td>
+          <td>{{ $ingreso->user->name ?? 'Desconocido' }}</td>
+          <td>{{ $ingreso->created_at->timezone('America/Santiago')->format('d/m/Y H:i') }}</td>
+        </tr>
+      @endforeach
+          </tbody>
+        </table>
+      </div>
 
-        </div>
+      <div class="footer1">
+        <p>© 2024 LavaPlus - Versión 1.0</p>
+      </div>
+    </div>
   </div>
-  <div class="footer1">
-    <p>© 2024 LavaPlus - Versión 1.0</p>
-  
-  </div>
+
   <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        @if (session('success'))
-            Swal.fire({
-                title: 'Éxito!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#54c45e',
-                customClass: {
-                    confirmButton: 'btn-custom'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload();
-                }
-            });
-        @endif
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    @if (session('success'))
+    Swal.fire({
+      title: 'Éxito!',
+      text: '{{ session('success') }}',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#54c45e',
+      customClass: {
+      confirmButton: 'btn-custom'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+      window.location.reload();
+      }
+    });
+  @endif
+  </script>
 </body>
 
 </html>
